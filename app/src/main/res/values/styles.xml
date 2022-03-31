@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Fonts -->
+
+    <style name="Font">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BronovaRegular" parent="Font">
+        <item name="fontFamily">@font/bronovaregular</item>
+    </style>
+
+    <style name="BronovaBold" parent="Font">
+        <item name="fontFamily">@font/bronovabold</item>
+    </style>
+
+    <!-- Home -->
+
+    <style name="Home_Title" parent="BronovaBold">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Home_Button" parent="BronovaBold">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Horoscope List -->
+
+    <style name="Horoscope_List_Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/bronovaregular</item>
+    </style>
+
+    <!-- Sign Detail -->
+
+    <style name="Sign_Detail_Header" parent="BronovaBold">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="Sign_Detail_Text">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/bronovaregular</item>
+    </style>
+
+    <!-- Viewholder -->
+
+    <style name="Horoscope_Viewholder_Name" parent="BronovaBold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Horoscope_Viewholder_Date" parent="BronovaBold">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Error -->
+
+    <style name="Error_Title" parent="BronovaBold">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Tablayout Style-->
+
+    <style name="TabLayout" parent="Widget.Design.TabLayout">
+        <item name="android:fontFamily">@font/bronovabold</item>
+        <item name="textAllCaps">true</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextAppearance">@style/TabItem</item>
+        <item name="tabTextColor">@color/white</item>
+    </style>
+
+    <style name="TabItem" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/bronovabold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/viewholder_sign_list_top_background"
+        app:layout_constraintBottom_toBottomOf="@+id/foreground"
+        app:layout_constraintEnd_toEndOf="@+id/foreground"
+        app:layout_constraintStart_toStartOf="@+id/foreground"
+        app:layout_constraintTop_toTopOf="@+id/foreground" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/foreground"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/viewholder_sign_list_top_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/horoscope_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_cancer" />
+
+        <TextView
+            android:id="@+id/horoscope_name"
+            style="@style/Horoscope_Viewholder_Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/horoscope_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horoscope_image"
+            tools:text="Cancer" />
+
+        <TextView
+            android:id="@+id/horoscope_date"
+            style="@style/Horoscope_Viewholder_Date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horoscope_name"
+            tools:text="21/06 - 22/07" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
