@@ -27,3 +27,6 @@ I have used a Clean MVVM architecture, separated by layers.
 
 ### - Detail
 <img src="https://user-images.githubusercontent.com/101630863/161161330-6e061bf9-d334-4f95-987e-8e852a851e76.png" width="200" height="400">
+
+### - Live Preview
+<img src="https://github.com/jarg-147/HoroscopumCodeReview/blob/main/assets/horoscopum_preview.gif" width="200" height="400">
