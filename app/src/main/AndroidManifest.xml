@@ -29,12 +29,6 @@
         </activity>
 
         <activity
-            android:name="com.bitbiird.horoscopum.ui.view.detail.HoroscopeDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Horoscopum.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-
-        <activity
             android:name="com.bitbiird.horoscopum.ui.view.main.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
