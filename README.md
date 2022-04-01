@@ -15,6 +15,7 @@ I have used a Clean MVVM architecture, separated by layers.
 * Dagger Hilt, for dependency injection.
 * Android Navigation Component, for navigation.
 * LiveData, for UI updates (MVVM).
+* Room, for saving data.
 
 ## Preview 📱
 
