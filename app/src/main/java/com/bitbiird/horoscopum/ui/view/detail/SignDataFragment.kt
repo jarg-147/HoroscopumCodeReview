@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bitbiird.horoscopum.data.model.HoroscopeResponse
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.databinding.FragmentSignDataBinding
 
-class SignDataFragment(private val horoscopeResponse: HoroscopeResponse) : Fragment() {
+class SignDataFragment(private val horoscopeItem: HoroscopeItem) : Fragment() {
 
     private var _binding: FragmentSignDataBinding? = null
     private val binding get() = _binding!!
@@ -28,12 +28,12 @@ class SignDataFragment(private val horoscopeResponse: HoroscopeResponse) : Fragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpView(horoscopeResponse)
+        setUpView(horoscopeItem)
     }
 
-    private fun setUpView(horoscopeResponse: HoroscopeResponse) {
+    private fun setUpView(horoscopeItem: HoroscopeItem) {
         binding.apply {
-            horoscopeResponse.apply {
+            horoscopeItem.apply {
                 currentDateText.text = currentDate
                 moodText.text = mood
                 luckyTimeText.text = luckyTime

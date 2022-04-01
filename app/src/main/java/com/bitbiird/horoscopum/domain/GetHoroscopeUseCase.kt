@@ -1,5 +1,6 @@
 package com.bitbiird.horoscopum.domain
 
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.data.repository.HoroscopeRepository
 import javax.inject.Inject
 
@@ -9,5 +10,15 @@ class GetHoroscopeUseCase @Inject constructor(
     suspend operator fun invoke(
         sign: String,
         day: String
-    ) = repository.getHoroscopeData(sign, day)
+    ): HoroscopeItem? {
+        val response = repository.getHoroscopeData(sign, day)
+
+        return if (response != null) {
+            repository.clearHoroscopeDataFromDB(sign, day)
+            repository.insertHoroscopeDataInDB(response, sign, day)
+            response
+        } else {
+            repository.getHoroscopeDataFromDB(sign, day)
+        }
+    }
 }

@@ -3,7 +3,7 @@ package com.bitbiird.horoscopum.data.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class HoroscopeResponse(
+data class HoroscopeItem(
     @SerializedName("color")
     val color: String = "",
     @SerializedName("compatibility")

@@ -1,6 +1,6 @@
 package com.bitbiird.horoscopum.domain
 
-import com.bitbiird.horoscopum.data.model.HoroscopeResponse
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.data.repository.HoroscopeRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -25,29 +25,49 @@ class GetHoroscopeUseCaseTest {
     }
 
     @Test
-    fun `when api returns null then return null`() = runBlocking {
+    fun `when api returns null, if saved data is null, then return null`() = runBlocking {
         //Given
         coEvery { horoscopRepository.getHoroscopeData("", "") } returns null
+        coEvery { horoscopRepository.getHoroscopeDataFromDB("", "") } returns null
 
         //When
         val response = getHoroscopeUseCase("", "")
 
         //Then
         coVerify { horoscopRepository.getHoroscopeData("", "") }
+        coVerify { horoscopRepository.getHoroscopeDataFromDB("", "") }
         assert(response == null)
+    }
+
+    @Test
+    fun `when api returns null, if saved data is not null, then saved data`() = runBlocking {
+        //Given
+        val horoscopeItem = mockk<HoroscopeItem>(relaxed = true)
+        coEvery { horoscopRepository.getHoroscopeData("", "") } returns null
+        coEvery { horoscopRepository.getHoroscopeDataFromDB("", "") } returns horoscopeItem
+
+        //When
+        val response = getHoroscopeUseCase("", "")
+
+        //Then
+        coVerify { horoscopRepository.getHoroscopeData("", "") }
+        coVerify { horoscopRepository.getHoroscopeDataFromDB("", "") }
+        assert(response == horoscopeItem)
     }
 
     @Test
     fun `when api returns value return value`() = runBlocking {
         //Given
-        val horoscopeResponse = mockk<HoroscopeResponse>(relaxed = true)
-        coEvery { horoscopRepository.getHoroscopeData("", "") } returns horoscopeResponse
+        val horoscopeItem = mockk<HoroscopeItem>(relaxed = true)
+        coEvery { horoscopRepository.getHoroscopeData("", "") } returns horoscopeItem
 
         //When
         val response = getHoroscopeUseCase("", "")
 
         //Then
         coVerify { horoscopRepository.getHoroscopeData("", "") }
-        assert(response == horoscopeResponse)
+        coVerify { horoscopRepository.clearHoroscopeDataFromDB("","") }
+        coVerify { horoscopRepository.insertHoroscopeDataInDB(horoscopeItem,"","") }
+        assert(response == horoscopeItem)
     }
 }

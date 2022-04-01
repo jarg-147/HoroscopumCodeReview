@@ -15,18 +15,30 @@
             android:id="@+id/action_HomeFragment_to_SignListFragment"
             app:destination="@id/SignListFragment"
             app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left" />
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/SignListFragment"
         android:name="com.bitbiird.horoscopum.ui.view.signslist.HoroscopeListFragment"
         android:label="SignsList"
         tools:layout="@layout/fragment_horoscope_list">
-
         <action
-            android:id="@+id/action_SignListFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_right" />
+            android:id="@+id/action_SignListFragment_to_SignDetailFragment"
+            app:destination="@id/SignDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/SignDetailFragment"
+        android:name="com.bitbiird.horoscopum.ui.view.detail.SignDetailFragment"
+        android:label="SignDetailFragment"
+        tools:layout="@layout/fragment_sign_detail">
+        <argument
+            android:name="HoroscopeSign"
+            app:argType="com.bitbiird.horoscopum.utils.enums.HoroscopeSigns" />
     </fragment>
 </navigation>

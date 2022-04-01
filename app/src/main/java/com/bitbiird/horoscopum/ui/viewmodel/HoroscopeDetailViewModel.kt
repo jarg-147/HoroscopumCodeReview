@@ -3,7 +3,7 @@ package com.bitbiird.horoscopum.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bitbiird.horoscopum.data.model.HoroscopeResponse
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.data.state.ResponseState
 import com.bitbiird.horoscopum.domain.GetHoroscopeUseCase
 import com.bitbiird.horoscopum.utils.helpers.InternetConnectionHelper
@@ -48,8 +48,8 @@ class HoroscopeDetailViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getHoroscopeData(sign: String): List<HoroscopeResponse?> {
-        val horoscopeDaysData = arrayListOf<Deferred<HoroscopeResponse?>>()
+    private suspend fun getHoroscopeData(sign: String): List<HoroscopeItem?> {
+        val horoscopeDaysData = arrayListOf<Deferred<HoroscopeItem?>>()
         coroutineScope {
             for (day in days) {
                 val horoscopeData = async {

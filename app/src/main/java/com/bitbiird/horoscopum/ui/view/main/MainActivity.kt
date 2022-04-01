@@ -20,13 +20,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    override fun onBackPressed() {
-        val navHostFragment: NavHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
-        when (navHostFragment.childFragmentManager.fragments[0]) {
-            is HomeFragment -> finish()
-            is HoroscopeListFragment -> navHostFragment.navController.navigate(R.id.action_SignListFragment_to_HomeFragment)
-        }
-    }
-
 }

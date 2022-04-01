@@ -1,48 +1,57 @@
 package com.bitbiird.horoscopum.ui.view.detail
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.bitbiird.horoscopum.R
-import com.bitbiird.horoscopum.data.model.HoroscopeResponse
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.data.state.ResponseState
-import com.bitbiird.horoscopum.databinding.ActivityHoroscopeDetailBinding
+import com.bitbiird.horoscopum.databinding.FragmentSignDetailBinding
 import com.bitbiird.horoscopum.ui.view.detail.viewpager.SignDataPagerAdapter
 import com.bitbiird.horoscopum.ui.viewmodel.HoroscopeDetailViewModel
 import com.bitbiird.horoscopum.utils.enums.HoroscopeSigns
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class HoroscopeDetailActivity : AppCompatActivity() {
+class SignDetailFragment : Fragment() {
 
-    private lateinit var binding: ActivityHoroscopeDetailBinding
+    private var _binding: FragmentSignDetailBinding? = null
+    private val binding get() = _binding!!
 
     private val horoscopeViewModel: HoroscopeDetailViewModel by viewModels()
 
-    companion object {
-        var HOROSCOPE_ITEM = "horoscopeSign"
-        var DATA = "data"
+    private val args: SignDetailFragmentArgs by navArgs()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSignDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHoroscopeDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getIntentData()
         initObservers()
         initListeners()
     }
 
     private fun getIntentData() {
-        val horoscopeSign =
-            intent.extras?.getBundle(DATA)?.getSerializable(HOROSCOPE_ITEM) as HoroscopeSigns
+        val horoscopeSign = args.horoscopeSign
         setUpView(horoscopeSign)
         getHoroscopeData(getString(horoscopeSign.signName))
     }
@@ -59,10 +68,10 @@ class HoroscopeDetailActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        horoscopeViewModel.horoscopeModel.observe(this) {
+        horoscopeViewModel.horoscopeModel.observe(viewLifecycleOwner) {
             when (it) {
                 is ResponseState.Success -> {
-                    val response = it.data as ArrayList<HoroscopeResponse>
+                    val response = it.data as ArrayList<HoroscopeItem>
                     if (response.isNotEmpty() && response.size == 3) {
                         showHoroscopeData(response)
                     } else {
@@ -77,19 +86,19 @@ class HoroscopeDetailActivity : AppCompatActivity() {
             }
         }
 
-        horoscopeViewModel.isLoading.observe(this) {
+        horoscopeViewModel.isLoading.observe(viewLifecycleOwner) {
             binding.loadingView.setIsLoading(it)
         }
 
     }
 
-    private fun showHoroscopeData(horoscopeResponseList: ArrayList<HoroscopeResponse>) {
-        setUpViewPager(horoscopeResponseList)
+    private fun showHoroscopeData(horoscopeItemList: ArrayList<HoroscopeItem>) {
+        setUpViewPager(horoscopeItemList)
         showUI()
     }
 
-    private fun setUpViewPager(horoscopeDataResponseList: ArrayList<HoroscopeResponse>) {
-        val adapter = SignDataPagerAdapter(this, horoscopeDataResponseList)
+    private fun setUpViewPager(horoscopeDataItemList: ArrayList<HoroscopeItem>) {
+        val adapter = SignDataPagerAdapter(requireActivity(), horoscopeDataItemList)
         binding.apply {
             viewpager.adapter = adapter
             TabLayoutMediator(daysTablayout, viewpager) { tab, position ->
@@ -114,7 +123,7 @@ class HoroscopeDetailActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.backButton.setOnClickListener { onBackPressed() }
+        binding.backButton.setOnClickListener { activity?.onBackPressed() }
     }
 
     private fun showUI() {
@@ -138,7 +147,7 @@ class HoroscopeDetailActivity : AppCompatActivity() {
 
     private fun showSnackBarInternetError() {
         binding.apply {
-            Snackbar.make(root, R.string.no_internet_data, BaseTransientBottomBar.LENGTH_SHORT)
+            Snackbar.make(root, R.string.no_internet_data, Snackbar.LENGTH_SHORT)
                 .setBackgroundTint(
                     ContextCompat.getColor(
                         root.context,
@@ -147,11 +156,6 @@ class HoroscopeDetailActivity : AppCompatActivity() {
                 )
                 .show()
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
     }
 
 }

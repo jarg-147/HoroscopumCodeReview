@@ -1,8 +1,9 @@
 package com.bitbiird.horoscopum.utils.enums
 
 import com.bitbiird.horoscopum.R
+import java.io.Serializable
 
-enum class HoroscopeSigns(val signName: Int, val signIcon: Int, val signDate: Int) {
+enum class HoroscopeSigns(val signName: Int, val signIcon: Int, val signDate: Int) : Serializable {
     Capricorn(R.string.capricorn, R.drawable.ic_capricorn, R.string.capricorn_date),
     Aquarium(R.string.aquarium, R.drawable.ic_aquarium, R.string.aquarium_date),
     Pisces(R.string.pisces, R.drawable.ic_pisces, R.string.pisces_date),

@@ -1,7 +1,7 @@
 package com.bitbiird.horoscopum.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.bitbiird.horoscopum.data.model.HoroscopeResponse
+import com.bitbiird.horoscopum.data.model.HoroscopeItem
 import com.bitbiird.horoscopum.data.state.ResponseState
 import com.bitbiird.horoscopum.domain.GetHoroscopeUseCase
 import com.bitbiird.horoscopum.utils.helpers.InternetConnectionHelper
@@ -84,7 +84,7 @@ class HoroscopeDetailViewModelTest {
     @Test
     fun `when viewmodel request horoscope data, return value`() = runTest {
         //Given
-        val response = mockk<HoroscopeResponse>(relaxed = true)
+        val response = mockk<HoroscopeItem>(relaxed = true)
         coEvery { internetConnectionHelper.isConnected() } returns true
         coEvery { getHoroscopeUseCase("", "") } returns response
 
