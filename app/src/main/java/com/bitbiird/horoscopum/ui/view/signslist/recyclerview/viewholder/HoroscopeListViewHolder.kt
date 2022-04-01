@@ -18,7 +18,7 @@ class HoroscopeListViewHolder(private val binding: ViewholderHoroscopeSignListBi
             horoscopeDate.text = context.getText(horoscopeSign.signDate)
 
             root.setOnClickListener {
-                listener.onSignSelected(horoscopeSign, binding.horoscopeImage)
+                listener.onSignSelected(horoscopeSign)
             }
         }
     }

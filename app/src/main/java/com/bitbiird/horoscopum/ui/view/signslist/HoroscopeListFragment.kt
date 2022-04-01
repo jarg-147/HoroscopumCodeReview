@@ -1,19 +1,13 @@
 package com.bitbiird.horoscopum.ui.view.signslist
 
-import android.app.Activity
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bitbiird.horoscopum.R
 import com.bitbiird.horoscopum.databinding.FragmentHoroscopeListBinding
 import com.bitbiird.horoscopum.ui.view.signslist.recyclerview.adapter.HoroscopeListAdapter
 import com.bitbiird.horoscopum.utils.enums.HoroscopeSigns
@@ -27,11 +21,6 @@ class HoroscopeListFragment : Fragment(), IOnSignSelected {
     private val binding get() = _binding!!
 
     private val adapter = HoroscopeListAdapter(this)
-
-    companion object {
-        var HOROSCOPE_ITEM = "horoscopeSign"
-        var DATA = "data"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,8 +61,9 @@ class HoroscopeListFragment : Fragment(), IOnSignSelected {
         }
     }
 
-    override fun onSignSelected(horoscopeSign: HoroscopeSigns, signImage: ImageView) {
-        val action = HoroscopeListFragmentDirections.actionSignListFragmentToSignDetailFragment(horoscopeSign)
+    override fun onSignSelected(horoscopeSign: HoroscopeSigns) {
+        val action =
+            HoroscopeListFragmentDirections.actionSignListFragmentToSignDetailFragment(horoscopeSign)
         findNavController().navigate(action)
     }
 
